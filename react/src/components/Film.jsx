@@ -150,15 +150,6 @@ const Film = () => {
       {/* Opening Crawl */}
       {filmData.opening_crawl && (
         <div style={{ marginBottom: '50px' }}>
-          <h2 style={{
-            fontSize: '32px',
-            fontWeight: 'bold',
-            marginBottom: '20px',
-            color: '#000'
-          }}>
-            Opening Crawl
-          </h2>
-          
           <div style={{
             backgroundColor: '#e6f3ff',
             padding: '20px',
