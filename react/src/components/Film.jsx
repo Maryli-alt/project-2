@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Film = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [filmData, setFilmData] = useState(null);
   const [charactersData, setCharactersData] = useState([]);
   const [planetsData, setPlanetsData] = useState([]);
@@ -58,11 +59,11 @@ const Film = () => {
   }, [id]);
 
   const handleCharacterClick = (characterId) => {
-    window.location.href = `/character/${characterId}`;
+    navigate(`/character/${characterId}`);
   };
 
   const handlePlanetClick = (planetId) => {
-    window.location.href = `/planet/${planetId}`;
+    navigate(`/planet/${planetId}`);
   };
 
   if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>Loading...</div>;

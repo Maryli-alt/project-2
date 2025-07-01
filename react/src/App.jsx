@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Home from './components/Home'
+import { useState, useEffect } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
+import Home from './components/Home';
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Link
 } from "react-router-dom";
-import Character from './components/Character'
+import Character from './components/Character';
+import Planet from './components/Planet';
+import Film from './components/Film';
 
 function App() {
   const [data, setData] = useState([]);
@@ -41,6 +43,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home characters={data} />}/>
             <Route path="/characters/:id" element={<Character/>}/>
+            <Route path="/planets/:id" element={<Planet/>}/>
+            <Route path="/films/:id" element={<Character/>}/>
           </Routes>
         </div>
       </Router>
