@@ -72,12 +72,12 @@ const Character = () => {
 
   const handlePlanetClick = (planetId) => {
     // Navigate to planet page
-    navigate(`/planet/${planetId}`);
+    navigate(`/planets/${planetId}`);
   };
 
   const handleFilmClick = (filmId) => {
     // Navigate to film page
-    navigate(`/film/${filmId}`);
+    navigate(`/films/${filmId}`);
   };
 
   if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>Loading...</div>;

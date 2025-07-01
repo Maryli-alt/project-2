@@ -44,7 +44,7 @@ function App() {
             <Route path="/" element={<Home characters={data} />}/>
             <Route path="/characters/:id" element={<Character/>}/>
             <Route path="/planets/:id" element={<Planet/>}/>
-            <Route path="/films/:id" element={<Character/>}/>
+            <Route path="/films/:id" element={<Film/>}/>
           </Routes>
         </div>
       </Router>

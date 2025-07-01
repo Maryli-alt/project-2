@@ -59,11 +59,11 @@ const Planet = () => {
   }, [id]);
 
   const handleCharacterClick = (characterId) => {
-    navigate(`/character/${characterId}`);
+    navigate(`/characters/${characterId}`);
   };
 
   const handleFilmClick = (filmId) => {
-    navigate(`/film/${filmId}`);
+    navigate(`/films/${filmId}`);
   };
 
   if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>Loading...</div>;
