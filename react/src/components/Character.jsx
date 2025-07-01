@@ -71,12 +71,10 @@ const Character = () => {
   }, [id]);
 
   const handlePlanetClick = (planetId) => {
-    // Navigate to planet page
     navigate(`/planets/${planetId}`);
   };
 
   const handleFilmClick = (filmId) => {
-    // Navigate to film page
     navigate(`/films/${filmId}`);
   };
 
@@ -208,8 +206,6 @@ const Character = () => {
           </div>
         </div>
       )}
-
-
     </div>
   );
 };

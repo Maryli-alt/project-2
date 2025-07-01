@@ -185,7 +185,7 @@ const Film = () => {
                   minWidth: '120px'
                 }}
               >
-                {character.name}
+                Character {character.character_id}
               </button>
             ))}
           </div>
@@ -225,7 +225,7 @@ const Film = () => {
                   minWidth: '120px'
                 }}
               >
-                {planet.name}
+                Planet {planet.planet_id}
               </button>
             ))}
           </div>

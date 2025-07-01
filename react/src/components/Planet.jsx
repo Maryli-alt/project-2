@@ -34,12 +34,22 @@ const Planet = () => {
           console.log('Could not fetch characters data:', err);
         }
 
-        // Fetch films for this planet
+        // Fetch films for this planet - updated to get full film details
         try {
-          const filmsResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/planets/${id}/films`);
-          if (filmsResponse.ok) {
-            const filmsData = await filmsResponse.json();
-            setFilmsData(filmsData);
+          const filmsIdsResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/planets/${id}/films`);
+          if (filmsIdsResponse.ok) {
+            const filmIds = await filmsIdsResponse.json();
+            
+            // Fetch details for each film
+            const filmPromises = filmIds.map(filmData => 
+              fetch(`${import.meta.env.VITE_API_URL}/api/films/${filmData.film_id}`)
+                .then(res => res.ok ? res.json() : null)
+            );
+            
+            const filmsDetails = await Promise.all(filmPromises);
+            // Filter out any null responses
+            const validFilms = filmsDetails.filter(film => film !== null);
+            setFilmsData(validFilms);
           }
         } catch (err) {
           console.log('Could not fetch films data:', err);
