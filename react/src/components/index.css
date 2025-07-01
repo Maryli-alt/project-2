@@ -1,9 +1,9 @@
 #characterList {
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid var(--dark2);
-    border-radius: 5px;
-    color: var(--dark2);
-    background-color: var(--light2);
-    font-weight: bold;
+    padding: 10px o !important;
+    margin: 10px !important;
+    border: 1px solid var(--dark2) !important;
+    border-radius: 5px !important;
+    color: var(--dark2) !important;
+    background-color: var(--light2) !important;
+    font-weight: bold !important;
   }

@@ -3,12 +3,13 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './components/Home'
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Routes,
-//   Link
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link
+} from "react-router-dom";
+import Character from './components/Character'
 
 function App() {
   const [data, setData] = useState([]);
@@ -42,7 +43,17 @@ function App() {
 
   return (
     <>
-      <Home data={data}/>
+      <Router>
+        <div className="App">
+          <header className="App-header"> 
+            <h1>Star Wars Universe Lookup</h1>
+          </header>
+          <Routes>
+            <Route path="/" element={<Home characters={data} />}/>
+            <Route path="/character/:id" element={<Character/>}/>
+          </Routes>
+        </div>
+      </Router>
     </>
   )
 }
