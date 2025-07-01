@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Home = ({ characters }) => {
     const renderCharacters = characters.map((character) => {
         return (
-            <Link to={`/characters/${character._id}`} key={character._id} style={{textDecoration : 'none'}}>
+            <Link to={`/characters/${character.id}`} key={character._id} style={{textDecoration : 'none'}}>
                 <button
                   style={{
                     border: '1px solid var(--dark2)',

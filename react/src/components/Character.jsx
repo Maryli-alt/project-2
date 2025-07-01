@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-const Character = ({ characterId }) => {
+const Character = () => {
+  const { id } = useParams();
   const [characterData, setCharacterData] = useState(null);
   const [planetData, setPlanetData] = useState(null);
   const [filmsData, setFilmsData] = useState([]);
@@ -13,7 +15,7 @@ const Character = ({ characterId }) => {
         setLoading(true);
         
         // Fetch character data
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/characters/${characterId}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/characters/${id}`);
         if (!response.ok) {
           throw new Error('Character could not be fetched!');
         }
@@ -35,7 +37,7 @@ const Character = ({ characterId }) => {
 
         // Fetch film IDs first, then fetch individual film details
         try {
-          const filmsIdsResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/characters/${characterId}/films`);
+          const filmsIdsResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/characters/${id}/films`);
           if (filmsIdsResponse.ok) {
             const filmIds = await filmsIdsResponse.json();
             
@@ -62,10 +64,10 @@ const Character = ({ characterId }) => {
       }
     };
 
-    if (characterId) {
+    if (id) {
       fetchCharacter();
     }
-  }, [characterId]);
+  }, [id]);
 
   const handlePlanetClick = (planetId) => {
     // Navigate to planet page

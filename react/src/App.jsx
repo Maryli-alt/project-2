@@ -31,16 +31,6 @@ function App() {
         fetchData();
       }, []);
 
-  const renderCharacters = characters => {
-        const divs = characters.map(character => {
-          const el = document.createElement('div');
-          el.addEventListener('click', () => goToCharacterPage(character.id));
-          el.textContent = character.name;
-          return el;
-        })
-        charactersList.replaceChildren(...divs)
-  }
-
   return (
     <>
       <Router>
@@ -50,7 +40,7 @@ function App() {
           </header>
           <Routes>
             <Route path="/" element={<Home characters={data} />}/>
-            <Route path="/character/:id" element={<Character/>}/>
+            <Route path="/characters/:id" element={<Character/>}/>
           </Routes>
         </div>
       </Router>
