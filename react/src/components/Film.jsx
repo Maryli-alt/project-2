@@ -23,23 +23,43 @@ const Film = () => {
         const filmResponse = await response.json();
         setFilmData(filmResponse);
 
-        // Fetch characters for this film
+        // Fetch characters for this film - get full character details
         try {
-          const charactersResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/films/${id}/characters`);
-          if (charactersResponse.ok) {
-            const charactersData = await charactersResponse.json();
-            setCharactersData(charactersData);
+          const charactersIdsResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/films/${id}/characters`);
+          if (charactersIdsResponse.ok) {
+            const characterIds = await charactersIdsResponse.json();
+            
+            // Fetch details for each character
+            const characterPromises = characterIds.map(characterData => 
+              fetch(`${import.meta.env.VITE_API_URL}/api/characters/${characterData.character_id}`)
+                .then(res => res.ok ? res.json() : null)
+            );
+            
+            const charactersDetails = await Promise.all(characterPromises);
+            // Filter out any null responses
+            const validCharacters = charactersDetails.filter(character => character !== null);
+            setCharactersData(validCharacters);
           }
         } catch (err) {
           console.log('Could not fetch characters data:', err);
         }
 
-        // Fetch planets for this film
+        // Fetch planets for this film - get full planet details
         try {
-          const planetsResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/films/${id}/planets`);
-          if (planetsResponse.ok) {
-            const planetsData = await planetsResponse.json();
-            setPlanetsData(planetsData);
+          const planetsIdsResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/films/${id}/planets`);
+          if (planetsIdsResponse.ok) {
+            const planetIds = await planetsIdsResponse.json();
+            
+            // Fetch details for each planet
+            const planetPromises = planetIds.map(planetData => 
+              fetch(`${import.meta.env.VITE_API_URL}/api/planets/${planetData.planet_id}`)
+                .then(res => res.ok ? res.json() : null)
+            );
+            
+            const planetsDetails = await Promise.all(planetPromises);
+            // Filter out any null responses
+            const validPlanets = planetsDetails.filter(planet => planet !== null);
+            setPlanetsData(validPlanets);
           }
         } catch (err) {
           console.log('Could not fetch planets data:', err);
@@ -172,7 +192,7 @@ const Film = () => {
             {charactersData.map((character, index) => (
               <button
                 key={index}
-                onClick={() => handleCharacterClick(character.character_id)}
+                onClick={() => handleCharacterClick(character.id)}
                 style={{
                   backgroundColor: '#87CEEB',
                   border: 'none',
@@ -185,7 +205,7 @@ const Film = () => {
                   minWidth: '120px'
                 }}
               >
-                Character {character.character_id}
+                {character.name}
               </button>
             ))}
           </div>
@@ -212,7 +232,7 @@ const Film = () => {
             {planetsData.map((planet, index) => (
               <button
                 key={index}
-                onClick={() => handlePlanetClick(planet.planet_id)}
+                onClick={() => handlePlanetClick(planet.id)}
                 style={{
                   backgroundColor: '#87CEEB',
                   border: 'none',
@@ -225,7 +245,7 @@ const Film = () => {
                   minWidth: '120px'
                 }}
               >
-                Planet {planet.planet_id}
+                {planet.name}
               </button>
             ))}
           </div>
